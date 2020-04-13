@@ -1,0 +1,10 @@
+{
+  "SECRET_KEY": "s$02)(npn&b1ky(0xy@2s7#l01oejnn$)0smao!l+bzqeco7wn",
+  "EMAIL_USER": "",
+  "EMAIL_PASSWORD": "",
+  "DBASE_NAME": "hyper4grass",
+  "DBASE_USER": "devel",
+  "DBASE_PASS": "Devel@27482",
+  "DBASE_HOST": "localhost",
+  "DBASE_PORT": "5432"
+}
