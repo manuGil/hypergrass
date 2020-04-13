@@ -1,0 +1,22 @@
+{% extends "hypergrass/base.html" %}
+{% block content %}
+    <h2>Your Missions </h2>
+    <small class="tex-muted">Click on a mission to see the results.</small>
+        {% for mission in missions %}
+            {% if mission.owner == user %}
+                <article class="media content-section">
+                    <div class="media-body">
+                        <h3><a class="article-title" href="{{ mission.get_absolute_url }}">{{ mission.mission_name }}</a> </h3>
+                        <div class="article-metadata">
+                            <small class="text-muted">Collected on {{ mission.date_mission }}</small>
+                        </div>
+                        <div >
+                            <small class="text-muted">Owner: {{ mission.owner }}</small>
+                        </div>
+                    </div>
+                </article>
+            {% endif %}
+        {% endfor %}
+{% endblock %}
+
+

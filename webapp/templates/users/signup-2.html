@@ -1,0 +1,19 @@
+{% extends "hypergrass/base.html" %}
+{% load crispy_forms_tags %}
+{%  block content %}
+    <h1>Create an Account</h1>
+    <div class="content-section">
+        <form class="site-form" action="/users/signup/" method="post">
+            {% csrf_token %}
+            <fieldset class="form-group">
+               <legend class="border-bottom mb-4">Join Us Today</legend>
+                <p>For using our services, request an account to: <a class="ml-2" href="mailto:info@spectroag.com">info@spectroag.com</a></p>
+            </fieldset>
+        </form>
+    </div>
+    <div>
+        <small class="text-muted">
+            Already Have an Account? <a class="ml-2" href="{% url 'users:login' %}">Sign In</a>
+        </small>
+    </div>
+{% endblock %}

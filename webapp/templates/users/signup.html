@@ -1,0 +1,22 @@
+{% extends "hypergrass/base.html" %}
+{% load crispy_forms_tags %}
+{%  block content %}
+    <h1>Create an Account</h1>
+    <div class="content-section">
+        <form class="site-form" action="/users/signup/" method="post">
+            {% csrf_token %}
+            <fieldset class="form-group">
+               <legend class="border-bottom mb-4">Join Us Today</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                  <button class="btn btn-outline-info" type="submit">Sign Up</button>
+            </div>
+        </form>
+    </div>
+    <div>
+        <small class="text-muted">
+            Already Have an Account? <a class="ml-2" href="{% url 'users:login' %}">Sign In</a>
+        </small>
+    </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "hypergrass/base.html" %}
+{% block content %}
+    <h1>Lading Page</h1>
+        <p>All that is need for the landing page.</p>
+        <nav>
+            <form class="logout-lik" action="{% url 'users:logout'%}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-outline-info" type="submit">Log Out</button>
+            </form>
+        </nav>
+{% endblock %}

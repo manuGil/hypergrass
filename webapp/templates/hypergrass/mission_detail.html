@@ -1,0 +1,59 @@
+{% extends 'hypergrass/base.html' %}
+{% load static %}
+{% block style %}
+    #map {
+        height: 600px;
+    }
+{%  endblock %}
+{% block content %}
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="#">{{ object.owner }}</a>
+                <small class="text-mutted">{{ object.date_mission }}</small>
+            </div>
+            <div class="article-title">
+                <h2 class="article-title">{{ object.mission_name }}</h2>
+            </div>
+            <div id="map" class="z-depth-1-half map-container">
+                <script>
+                                 // add the OpenStreetMap tiles
+                 var lyrOSM = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+                 var lyrNdvi;
+                 var map_center_y;
+                 var map_center_x;
+                 var openStreet = L.tileLayer(lyrOSM, { maxZoom: 20,
+                    attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+                    });
+
+                 {% with object.results_folder|add:'/ndvi_web.png' as ndvi_layer %}
+                    lyrNdvi = '{% static ndvi_layer%}';
+                 {% endwith %}
+                ndvi = L.imageOverlay(lyrNdvi, [[ {{ object.bbox_tl_y }}, {{ object.bbox_tl_x }}],[ {{ object.bbox_br_y }}, {{ object.bbox_br_x }}]], {
+                        opacity: 0.75
+                        });
+                map_center_y = ({{ object.bbox_tl_y }} + {{ object.bbox_br_y }})/2;
+                map_center_x = ({{ object.bbox_tl_x }} + {{ object.bbox_br_x }})/2;
+                var map = L.map('map', {
+                    center: [ map_center_y, map_center_x],
+                    zoom: 16,
+                    maxZoom: 22,
+                    layers: [openStreet, ndvi]
+                });
+
+                var baseLayers = {
+                     "Open Streets": openStreet
+                 };
+
+                var overlays = {
+                     "NDVI": ndvi
+                 };
+
+                 L.control.layers(baseLayers, overlays).addTo(map);
+                 L.control.scale().addTo(map);
+                    </script>
+            </div>
+
+        </div>
+    </article>
+{% endblock %}

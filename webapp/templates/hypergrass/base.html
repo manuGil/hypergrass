@@ -1,0 +1,132 @@
+<!-- load files from static folder -->
+{% load  static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}">
+
+     <!-- Font Awesome 5 -->
+    <link rel="stylesheet" href={% static "assets/libs/@fortawesome/fontawesome-free/css/all.min.css" %}>
+    <!-- Purpose CSS -->
+    <link rel="stylesheet"  id="stylesheet" href={% static "assets/css/purpose.css" %} >
+
+    <!-- Bootstrap CSS -->
+    <!--
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    -->
+    <!-- load custom css -->
+    <!--
+    <link rel="stylesheet" type="text/css" href={% static 'users/main.css' %}>
+    -->
+
+    <!-- leftlet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin="">
+    </script>
+
+    <style>
+    {% block style %} {% endblock %}
+    </style>
+
+    <title>Hyper4Grass</title>
+</head>
+
+<body>
+    <header class="site-header">
+        <nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark bg-gradient-info mt-4">
+            <div class="container">
+                <a class="navbar-brand" href="/">Hyper4Grass</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-success" aria-controls="navbar-success" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar-success">
+                    <ul class="navbar-nav ml-auto">
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-icon" href="{% url 'users:profile' %}">
+                                    <i class="fas fa-id-badge"></i>
+                                    <span class="nav-link-inner--text">Profile</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-icon" href="{% url 'users:logout' %}">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    <span class="nav-link-inner--text">Logout</span>
+                                </a>
+                            </li>
+
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-icon" href="{% url 'users:login' %}">
+                                    <i class="fas fa-key"></i>
+                                    <span class="nav-link-inner--text">Login</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-icon" href="{% url 'users:singup' %}">
+                                    <i class="fas fa-user-plus"></i>
+                                    <span class="nav-link-inner--text">Sign Up</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                {% block content %} {% endblock%}
+            </div>
+            <!--
+            <div class="col-md-4">
+                <div class="content-section">
+                    <h3>Our Services</h3>
+                    <p class='text-muted'>Access services and information.</p>
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-light"><a href="{% url 'hypergrass:missions' %}">Missions</a></li>
+                            </ul>
+                </div>
+            </div>
+            -->
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer>
+    <div class="footer pt-5 pb-4 footer-light" id="footer-main">
+        <div class="row text-center text-sm-left align-items-sm-center">
+          <div class="col-sm-6">
+            <p class="text-sm mb-0">&copy; 2020 Copyright: <a href="https://spectroag.com/" class="h6 text-sm" target="_blank">Spectro_AG BV</a></p>
+          </div>
+        </div>
+        <div/>
+    </div>
+    </footer>
+    <!--TODO: Ask Andrej about footer -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

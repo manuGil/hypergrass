@@ -1,0 +1,14 @@
+{% extends "hypergrass/base.html" %}
+{% block content %}
+    <h1>My Farms</h1>
+    {% for farm in farms %}
+        <article class="media content-section">
+            <div class="media-body">
+                <h2><a class="article-title" href="{% url 'hypergrass:missions' %}">{{ farm.name }}</a> </h2>
+                <div class="article-metadata">
+                    <small class="text-muted">A {{ farm.crop }} plot in {{ farm.place_name }}</small>
+                </div>
+            </div>
+        </article>
+    {%  endfor %}
+{% endblock %}

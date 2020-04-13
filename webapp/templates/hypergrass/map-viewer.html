@@ -1,0 +1,44 @@
+{% extends 'hypergrass/base.html' %}
+{% load static %}
+{% block style %}
+    #map {
+        height: 600px;
+    }
+{%  endblock %}
+{% block content %}
+    <div class="article-title">
+    <h2>Mission I</h2>
+    </div>
+     <div id="map" class="z-depth-1-half map-container">
+         <script>
+             // add the OpenStreetMap tiles
+             var lyrOSM = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+             var openStreet = L.tileLayer(lyrOSM, { maxZoom: 19,
+                attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+                });
+            <!--Use the layers_folder field of mission model to replace mission1 folder -->
+            ndvi = L.imageOverlay('{% static 'mission3/ndvi_web.png' %}', [[52.22747, 6.64655],[52.22412, 6.65304]], {
+                opacity: 0.75
+             });
+
+            var map = L.map('map', {
+                center: [52.226, 6.65],
+                zoom: 16.5,
+                layers: [openStreet, ndvi]
+            });
+
+            var baseLayers = {
+                 "Open Streets": openStreet
+             };
+
+            var overlays = {
+                 "NDVI": ndvi
+             };
+
+             L.control.layers(baseLayers, overlays).addTo(map);
+             L.control.scale().addTo(map);
+         </script>
+     </div>
+
+{% endblock %}

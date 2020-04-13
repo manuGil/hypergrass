@@ -1,0 +1,9 @@
+{% extends "hypergrass/base.html" %}
+{%  block content %}
+    <legend>You have been logged out</legend>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                <a href="{% url 'users:login' %}">Sign In Again</a>
+            </small>
+        </div>
+{% endblock %}
