@@ -3,7 +3,7 @@ A web application for managing and processing data from RGB and Hyperspectral se
 
 # Skills Adquired
 * Web development with DJango 3.x
-* HTML templates
+* Bootstrap 4
 * Model, View, Controller development paradigm
 * Apache 2 webservice
 * Deploying applications in AWS
