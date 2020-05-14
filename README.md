@@ -15,4 +15,4 @@ A web application for managing and processing data from RGB and Hyperspectral se
 This project is in an early phase of development. So far, it contains two apps.
 
 * ***Users:*** an app to create and manage users accounts.
-* ***hypergrass:*** an app to crate and organize data from monitoring missions (data collected in the field, and data produced by a machine learning algorithm to estimate the content of protein and dry matter.
+* ***hypergrass:*** an app to crate and organize data from monitoring missions (data collected in the field, and data produced by a machine learning algorithm to estimate the content of protein and dry matter).
